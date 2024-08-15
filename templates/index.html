@@ -94,7 +94,7 @@
                   <li>Help center access</li>
                 </ul>
                 <button type="button" class="w-100 btn btn-lg btn-primary">
-                  Sign up for free
+                  Know More...
                 </button>
               </div>
             </div>
@@ -117,7 +117,7 @@
                   type="button"
                   class="w-100 btn btn-lg btn-outline-primary"
                 >
-                  Get started
+                  Know More...
                 </button>
               </div>
             </div>
@@ -140,13 +140,15 @@
                   type="button"
                   class="w-100 btn btn-lg btn-outline-primary"
                 >
-                  Contact us
+                  Know More...
                 </button>
               </div>
             </div>
           </div>
         </div>
       </main>
+      <label for="appt"><h1>SET ALARM:</h1></label>
+      <input type="time" id="alarm" name="alarm" />
     </div>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -155,22 +157,36 @@
     ></script>
     <script>
       const updatetime = () => {
-        let date = new Date();
-        india.innerHTML = date
+        let d = new Date();
+        india.innerHTML = d
           .toLocaleString("en-US", {
             timeZone: "Asia/Kolkata",
           })
           .split(", ")[1];
-        dubai.innerHTML = date
+        dubai.innerHTML = d
           .toLocaleString("en-US", {
             timeZone: "Asia/Dubai",
           })
           .split(", ")[1];
-        germany.innerHTML = date
+        germany.innerHTML = d
           .toLocaleString("en-US", {
             timeZone: "Europe/Berlin",
           })
           .split(", ")[1];
+
+        let hour = alarm.value.split(":")[0];
+        let minute = alarm.value.split(":")[1];
+        // console.log(d.getHours(), hour);
+        // console.log(d.getMinutes(), minute);
+
+        if (d.getHours() == hour && d.getMinutes() == minute) {
+          console.log("alarm ring.....");
+          let audiolink =
+            "https://file-examples.com/storage/fe519944ff66ba53b99c446/2017/11/file_example_MP3_1MG.mp3";
+
+          var audio = new Audio(audiolink);
+          audio.play();
+        }
       };
       setInterval(updatetime, 1000);
     </script>
