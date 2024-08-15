@@ -31,36 +31,6 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Dropdown
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><hr class="dropdown-divider" /></li>
-                <li>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-            </li>
-          </ul>
           <form class="d-flex" role="search">
             <input
               class="form-control me-2"
@@ -88,10 +58,10 @@
               <div class="card-body">
                 <h1 class="card-title pricing-card-title" id="india"></h1>
                 <ul class="list-unstyled mt-3 mb-4">
-                  <li>10 users included</li>
-                  <li>2 GB of storage</li>
-                  <li>Email support</li>
-                  <li>Help center access</li>
+                  <li>Top Spot: Taj Mahal</li>
+                  <li>Tour Rating: 4.5/5</li>
+                  <li>Lang: Hindi, English</li>
+                  <li>Best Time: Oct - Mar</li>
                 </ul>
                 <button type="button" class="w-100 btn btn-lg btn-primary">
                   Know More...
@@ -108,10 +78,10 @@
               <div class="card-body">
                 <h1 class="card-title pricing-card-title" id="dubai"></h1>
                 <ul class="list-unstyled mt-3 mb-4">
-                  <li>20 users included</li>
-                  <li>10 GB of storage</li>
-                  <li>Priority email support</li>
-                  <li>Help center access</li>
+                  <li>Top Spot: Burj Khalifa</li>
+                  <li>Tour Rating: 4.8/5</li>
+                  <li>Lang: Arabic, English</li>
+                  <li>Best Time: Nov - Mar</li>
                 </ul>
                 <button
                   type="button"
@@ -131,10 +101,10 @@
               <div class="card-body">
                 <h1 class="card-title pricing-card-title" id="germany"></h1>
                 <ul class="list-unstyled mt-3 mb-4">
-                  <li>30 users included</li>
-                  <li>15 GB of storage</li>
-                  <li>Phone and email support</li>
-                  <li>Help center access</li>
+                  <li>Top Spot: Branden Gate</li>
+                  <li>Tour Rating: 4.7/5</li>
+                  <li>Lang: German, English</li>
+                  <li>Best Time: May - Sep</li>
                 </ul>
                 <button
                   type="button"
@@ -147,8 +117,31 @@
           </div>
         </div>
       </main>
-      <label for="appt"><h1>SET ALARM:</h1></label>
-      <input type="time" id="alarm" name="alarm" />
+      <div class="card mb-4 rounded-3 shadow-sm border-primary">
+        <div class="card-header py-3 border-primary">
+          <h4 class="my-0 fw-normal">Set Your Alarm</h4>
+        </div>
+        <div class="card-body text-center">
+          <div class="mb-3">
+            <label for="alarm" class="form-label"
+              ><h5>Select Alarm Time:</h5></label
+            >
+            <input
+              type="time"
+              id="alarm"
+              name="alarm"
+              class="form-control w-50 mx-auto"
+            />
+          </div>
+          <button
+            type="button"
+            class="btn btn-primary btn-lg"
+            onclick="setAlarm()"
+          >
+            Set Alarm
+          </button>
+        </div>
+      </div>
     </div>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -158,26 +151,18 @@
     <script>
       const updatetime = () => {
         let d = new Date();
-        india.innerHTML = d
-          .toLocaleString("en-US", {
-            timeZone: "Asia/Kolkata",
-          })
+        document.getElementById("india").innerHTML = d
+          .toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
           .split(", ")[1];
-        dubai.innerHTML = d
-          .toLocaleString("en-US", {
-            timeZone: "Asia/Dubai",
-          })
+        document.getElementById("dubai").innerHTML = d
+          .toLocaleString("en-US", { timeZone: "Asia/Dubai" })
           .split(", ")[1];
-        germany.innerHTML = d
-          .toLocaleString("en-US", {
-            timeZone: "Europe/Berlin",
-          })
+        document.getElementById("germany").innerHTML = d
+          .toLocaleString("en-US", { timeZone: "Europe/Berlin" })
           .split(", ")[1];
 
-        let hour = alarm.value.split(":")[0];
-        let minute = alarm.value.split(":")[1];
-        // console.log(d.getHours(), hour);
-        // console.log(d.getMinutes(), minute);
+        let hour = document.getElementById("alarm").value.split(":")[0];
+        let minute = document.getElementById("alarm").value.split(":")[1];
 
         if (d.getHours() == hour && d.getMinutes() == minute) {
           console.log("alarm ring.....");
@@ -188,6 +173,16 @@
           audio.play();
         }
       };
+
+      const setAlarm = () => {
+        let alarmTime = document.getElementById("alarm").value;
+        if (alarmTime) {
+          alert(`Alarm set for ${alarmTime}`);
+        } else {
+          alert("Please select a time to set the alarm.");
+        }
+      };
+
       setInterval(updatetime, 1000);
     </script>
   </body>
